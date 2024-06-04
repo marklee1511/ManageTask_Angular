@@ -14,14 +14,14 @@ app.get('/', (req, res) => {
 })
 
 // DỰ ÁN
-app.get('/duan', (req, res) => {
+app.get('/project', (req, res) => {
     let sql = `SELECT * FROM duan ORDER BY id_duan `;
     db.query(sql, (err, data) => {
     if (err) res.json({'message':err});
     else res.json(data);
     })
 });
-app.get('/duan/:id', (req, res) => {
+app.get('/project/:id', (req, res) => {
     let id = req.params.id;
     if(isNaN(id)==true) return res.json({'message':'Dự án không tồn tại'});
     let sql = `SELECT * FROM duan WHERE id_duan =?`;
@@ -31,7 +31,7 @@ app.get('/duan/:id', (req, res) => {
     else res.json(data[0]);
     })
 });
-app.post('/duan', (req, res) => {
+app.post('/project', (req, res) => {
     
     let { ten_duan, ngay_batdau, tien, leader, thanh_vien } = req.body;
     console.log(req.body);
@@ -44,7 +44,7 @@ app.post('/duan', (req, res) => {
         else res.json({ 'message': 'Dự án được thêm thành công', 'id_duan': data.insertId });
     });
 });
-app.delete('/duan/:id', (req, res) => {
+app.delete('/project/:id', (req, res) => {
     let id = req.params.id;
     if (isNaN(id)) {
         return res.status(400).json({ 'message': 'Invalid project ID' });
@@ -61,7 +61,7 @@ app.delete('/duan/:id', (req, res) => {
     });
 });
 
-app.put('/duan/:id', (req, res) => {
+app.put('/project/:id', (req, res) => {
     let id = req.params.id;
     let { ten_duan, ngay_batdau, tien, leader, thanh_vien } = req.body;
 
@@ -86,14 +86,14 @@ app.put('/duan/:id', (req, res) => {
 
 
 // NHÂN VIÊN
-app.get('/nhanvien', (req, res) => {
+app.get('/staff', (req, res) => {
     let sql = `SELECT * FROM nhanvien`;
     db.query(sql, (err, data) => {
     if (err) res.json({'message':err});
     else res.json(data);
     })
 });
-app.get('/nhanvien/:id', (req, res) => {
+app.get('/staff/:id', (req, res) => {
     let id = req.params.id;
     if(isNaN(id)==true) return res.json({'message':'Nhân viên không tồn tại'});
     let sql = `SELECT * FROM nhanvien WHERE idnv =?`;
